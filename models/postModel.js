@@ -30,6 +30,14 @@ const postSchema = new mongoose.Schema(
                 },
             },
         ],
+    
+        category: {
+            type: ObjectId,
+            ref: "Category",
+            required : [true, 'your post  must belong to a category'],
+        
+        },
+    
     },
     { timestamps: true }
 );
