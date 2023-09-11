@@ -32,7 +32,16 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         default: 'user'
+    },
+
+    profile: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Profile',
+        required: false
     }
+
+
+
 }, { timestamps: true })
 
 

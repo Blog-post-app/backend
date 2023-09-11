@@ -24,6 +24,7 @@ const {
   showSingleGundemeDair,
   showHakkimda,
 } = require("../controllers/postController");
+const { updateProfile, getProfile } = require("../controllers/profileController");
 
 //blog routes
 router.post("/post/create", isAuthenticated, isAdmin, createPost);
@@ -47,7 +48,7 @@ router.get("/feed/makaleler/:id", showSingleMakale);
 router.get("/feed/gundeme-dair", showGundemeDair);
 router.get("/feed/gundeme-dair/:id", showSingleGundemeDair);
 router.get("/feed/hakkimda", showHakkimda);
-
-
+router.put("/admin/profile/update/:id", updateProfile);
+router.get("/admin/profile",isAuthenticated, getProfile);
 
 module.exports = router;
