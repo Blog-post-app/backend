@@ -15,12 +15,12 @@ exports.updateProfile = async (req, res, next) => {
 
     if (!profile) {
       // CREATE POST
-      console.log("hi");
       profile = await Profile.create({
         name,
         surname,
         profession,
         email,
+        phone,
         content,
       });
       res.status(201).json({

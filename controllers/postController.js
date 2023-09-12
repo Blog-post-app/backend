@@ -36,6 +36,7 @@ exports.createPost = async (req, res, next) => {
           url: result.secure_url,
         },
     });
+    console.log(post)
     res.status(201).json({
       success: true,
       post,
