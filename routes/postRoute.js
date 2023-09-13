@@ -29,7 +29,7 @@ const { updateProfile, getProfile } = require("../controllers/profileController"
 //blog routes
 router.post("/post/create", isAuthenticated, isAdmin, createPost);
 // this will bi anasayfa
-router.get("/posts/show", showPost);
+
 
 router.get("/post/:id", showSinglePost);
 router.delete("/delete/post/:id", isAuthenticated, isAdmin, deletePost);
@@ -39,6 +39,7 @@ router.put("/addlike/post/:id", isAuthenticated, addLike);
 router.put("/removelike/post/:id", isAuthenticated, removeLike);
 
 // custom routes
+router.get("/feed/anasayfa", showPost);
 router.get("/feed/yazilar", showYazilar);
 router.get("/feed/yazilar/:id", showSingleYazi);
 router.get("/feed/siirler", showSiirler);
