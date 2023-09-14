@@ -30,7 +30,7 @@ const { updateProfile, getProfile } = require("../controllers/profileController"
 router.post("/post/create", isAuthenticated, isAdmin, createPost);
 // this will bi anasayfa
 
-
+router.get("/posts/show", showPost);
 router.get("/post/:id", showSinglePost);
 router.delete("/delete/post/:id", isAuthenticated, isAdmin, deletePost);
 router.put("/update/post/:id", isAuthenticated, isAdmin, updatePost);
