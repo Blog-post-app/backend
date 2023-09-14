@@ -20,9 +20,9 @@ exports.createPost = async (req, res, next) => {
     });
 
     // CHECK THE CATEGORY
-    let category = await Category.findOne({ name: "Makaleler" });
+    let category = await Category.findOne({ name: categoryName });
     if (!category) {
-      category = Category.create({ name: "Makaleler" });
+      category = Category.create({ name: categoryName });
     }
 
     // CREATE POST
