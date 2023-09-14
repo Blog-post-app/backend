@@ -8,7 +8,7 @@ const { ObjectId } = mongoose.Schema;
 
 //create post
 exports.createPost = async (req, res, next) => {
-  const { title, content, postedBy, categoryName, image, likes, comments } =
+  const { title, content, postedBy, type, image, likes, comments } =
     req.body;
 
   try {
@@ -20,9 +20,11 @@ exports.createPost = async (req, res, next) => {
     });
 
     // CHECK THE CATEGORY
-    let category = await Category.findOne({ name: categoryName });
+    let category = await Category.findOne({ name: type });
+    console.log('category: ',category);
+    console.log("categoryName: ", type)
     if (!category) {
-      category = Category.create({ name: categoryName });
+      category = Category.create({ name: type });
     }
 
     // CREATE POST
