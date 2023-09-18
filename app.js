@@ -30,6 +30,7 @@ const errorHandler = require('./middleware/error');
 //import routes
 const authRoutes = require('./routes/authRoutes');
 const postRoute = require('./routes/postRoute');
+const adminRoute = require('./routes/adminRoutes')
 
 
 //database connection
@@ -80,6 +81,7 @@ app.use(hpp());
 //ROUTES MIDDLEWARE
 app.use('/api', authRoutes);
 app.use('/api', postRoute);
+app.use('/api', adminRoute);
 
 __dirname = path.resolve()
 
