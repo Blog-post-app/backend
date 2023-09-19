@@ -9,6 +9,48 @@ const { ObjectId } = mongoose.Schema;
 
 
 
+/**
+ * @route api/admin/post/create-post  --create post
+ */
+exports.createPost = async (req, res, next) => {
+  const { title, content, postedBy, type, image, likes, comments } = req.body;
+
+  try {
+    //upload image in cloudinary
+    const result = await cloudinary.uploader.upload(image, {
+      folder: "posts",
+      width: 1200,
+      crop: "scale",
+    });
+
+    // CHECK THE CATEGORY
+    let category = await Category.findOne({ name: type });
+    if (!category) {
+      category = await Category.create({ name: type });
+    }
+    // CREATE POST
+    const post = await Post.create({
+      title,
+      content,
+      postedBy: req.user._id,
+      category: category,
+      image: {
+        public_id: result.public_id,
+        url: result.secure_url,
+      },
+    });
+    res.status(201).json({
+      success: true,
+      post,
+    });
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+
+
 
 /**
  * @route api/admin/anasayfa  --get all posts
@@ -99,47 +141,6 @@ exports.showAdminGundemeDair = async (req, res, next) => {
       next(error);
     }
   };
-
-
-/**
- * @route api/post/create  --create post
- */
-exports.createPost = async (req, res, next) => {
-  const { title, content, postedBy, type, image, likes, comments } = req.body;
-
-  try {
-    //upload image in cloudinary
-    const result = await cloudinary.uploader.upload(image, {
-      folder: "posts",
-      width: 1200,
-      crop: "scale",
-    });
-
-    // CHECK THE CATEGORY
-    let category = await Category.findOne({ name: type });
-    if (!category) {
-      category = await Category.create({ name: type });
-    }
-    // CREATE POST
-    const post = await Post.create({
-      title,
-      content,
-      postedBy: req.user._id,
-      category: category,
-      image: {
-        public_id: result.public_id,
-        url: result.secure_url,
-      },
-    });
-    res.status(201).json({
-      success: true,
-      post,
-    });
-  } catch (error) {
-    console.log(error);
-    next(error);
-  }
-};
 
 
 /**

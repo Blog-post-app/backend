@@ -26,9 +26,6 @@ const {
 const { isAuthenticated, isAdmin } = require("../middleware/auth");
 const {showHakkimda} = require("../controllers/profile.controller");
 
-//blog routes
-router.post("/post/create", isAuthenticated, isAdmin, createPost);
-// this will bi anasayfa
 
 router.get("/posts/show", showPost);
 router.get("/post/:id", showSinglePost);
