@@ -148,8 +148,7 @@ exports.showAdminGundemeDair = async (req, res, next) => {
  */
 exports.getProfile = async (req, res, next) => {
     try {
-      const user = await User.findById(req.user.id).select("-password");
-      const profile = await Profile.findById(user.profile);
+      const profile = await Profile.findOne();
       res.status(200).json({
         success: true,
         profile,
@@ -161,7 +160,7 @@ exports.getProfile = async (req, res, next) => {
 
 
 /**
- * @route api/admin/profile/update/:id  --update profile
+ * @route api/admin/profile/update  --update profile
  */
 exports.updateProfile = async (req, res, next) => {
     const { name, profession, email, content, phone } = req.body;

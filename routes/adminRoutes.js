@@ -20,7 +20,8 @@ router.get("/admin/siirler", isAuthenticated, isAdmin, showAdminSiirler);
 router.get("/admin/makaleler", isAuthenticated, isAdmin, showAdminMakaleler);
 router.get("/admin/gundeme-dair", isAuthenticated, isAdmin, showAdminGundemeDair);
 router.post("/admin/create-post", isAuthenticated, isAdmin, createPost);
-router.put("/admin/profile/update/", isAuthenticated, isAdmin, updateProfile);
 router.get("/admin/profile", isAuthenticated, isAdmin, getProfile);
+router.put("/admin/profile/update/", isAuthenticated, isAdmin, updateProfile);
+
 
 module.exports = router;
