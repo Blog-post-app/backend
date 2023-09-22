@@ -173,7 +173,6 @@ exports.updateProfile = async (req, res, next) => {
         // CREATE POST
         profile = await Profile.create({
           name,
-          surname,
           profession,
           email,
           phone,
@@ -185,10 +184,14 @@ exports.updateProfile = async (req, res, next) => {
         });
       } else {
         // update profile
-        profile = await Profile.findOneAndUpdate( req.body, {
-          new: true,
-          runValidators: true,
-        });
+        profile = await Profile.findOne();
+        profile.name = name;
+        profile.profession = profession;
+        profile.email = email;
+        profile.phone = phone;
+        profile.content = content;
+        profile.save();
+               console.log('profile', profile);
         res.status(201).json({
           success: true,
           profile,
